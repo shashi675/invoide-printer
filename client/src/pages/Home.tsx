@@ -19,21 +19,22 @@ const Home: React.FC = () => {
         setProducts(products => [...products, product]);
     }
 
-    const deleteProduct = (prod: Product) => {
-        setProducts(products.filter((product)=>{
-            return product !== prod;
-          }))
-    }
-
   return (
     <div className='py-4 min-h-screen'>
         <h1 className='text-2xl py-4 text-center'>Your products</h1>
-        <div>
-            { products.length === 0 ? 
-            <div className='py-4 pl-2 mx-auto my-2 shadow-2xl bg-pink-50 rounded w-11/12'>No products to show</div> :
-            products.map((product) => { 
-                    return <ProductDisplay product={product} deleteProduct={deleteProduct} />
-                })
+        <div className=''>
+            { (products.length !== 0) ?
+                <div className='flex justify-between items-center py-4 px-2 mx-auto my-2 shadow-2xl bg-pink-50 rounded w-11/12'>
+                    <p>Product Name</p>
+                    <p>Product Quantity</p>
+                    <p>Product Price</p>
+                    <p>Product Total</p>
+                </div> : <div className='py-4 pl-2 mx-auto my-2 shadow-2xl bg-pink-50 rounded w-11/12'>No products to show</div> 
+            }
+            { 
+            products?.map((product) => { 
+                return <ProductDisplay product={product} />
+            })
             }
         </div>
         

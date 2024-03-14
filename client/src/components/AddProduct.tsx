@@ -35,7 +35,7 @@ const AddProduct: React.FC<AddProductProps> = ({ addProduct }) => {
   };
 
   return (
-    <div className='flex flex-col py-4 pl-2 mx-auto mb-4 shadow-2xl bg-pink-50 rounded w-11/12'>
+    <div className='flex flex-col py-4 pl-2 mx-auto my-2 shadow-2xl bg-pink-50 rounded w-11/12'>
         <h1 className='text-2xl text-center'>Add products</h1>
         <form onSubmit={handleSubmit}>
           <div className='pr-3 my-2'>

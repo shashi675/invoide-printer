@@ -7,23 +7,20 @@ interface ProductForm {
   quantity: number
 }
 
-type deleteProduct = (product: ProductForm) => void;
-
 interface ProductComponentProps {
   product: ProductForm,
-  deleteProduct: deleteProduct
 }
 
-const ProductDisplay: React.FC<ProductComponentProps> = ({ product, deleteProduct }) => {
+const ProductDisplay: React.FC<ProductComponentProps> = ({ product }) => {
 
   return (
-    <div className='flex justify-between items-center py-4 px-2 mx-auto my-2 shadow-2xl bg-pink-50 rounded w-11/12'>
-        <div>
-          <p>Product Name : {product.productName}</p>
-          <p>Product Quantity : {product.price}</p>
-          <p>Product Price : {product.quantity}</p>
+    <div className='justify-between items-center py-2 px-2 mx-auto bg-pink-50 w-11/12'>
+        <div className='flex justify-between'>
+          <p className='items-start'>{product.productName}</p>
+          <p className='self-start'>{product.price}</p>
+          <p className='self-start'>{product.quantity}</p>
+          <p className='self-start'>{product.price * product.quantity}</p>
         </div>
-        <button onClick={() => deleteProduct(product)} className='bg-red-500 text-white py-2 px-4 rounded-md'>Delete Product</button>
     </div>
   );
 };
