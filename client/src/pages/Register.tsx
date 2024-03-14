@@ -19,6 +19,7 @@ const Register: React.FC = () => {
   const [error, setError] = useState("");
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setError('');
     const { name, value } = e.target;
     setFormData(prevState => ({
       ...prevState,

@@ -3,23 +3,11 @@ import './App.css';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Home from './pages/Home';
-import Navbar from './components/Navbar';
 import { useState } from 'react';
 
 
 
 function App() {
-
-  const Layout = () => {
-    return (
-      <div className=''>
-        <Navbar />
-        <div className="">
-          <Outlet />
-        </div>
-      </div>
-    )
-  }
 
   type User = any;
 

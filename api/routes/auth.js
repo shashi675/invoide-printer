@@ -67,7 +67,6 @@ const login = async (req, res) => {
             const { password, __v, _id, ...remainingUserData } = existingUser.toJSON();
             remainingUserData["token"] = token;
 
-            console.log(remainingUserData)
             res.status(200).json({ message: "Login successfull", userData: remainingUserData });
         }
     }
