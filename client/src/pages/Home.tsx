@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import AddProduct from '../components/AddProduct';
 import ProductDisplay from '../components/ProductDispaly';
+import axios from 'axios';
 
 
 
@@ -17,6 +18,15 @@ const Home: React.FC = () => {
 
     const addProduct = (product: Product) => {
         setProducts(products => [...products, product]);
+    }
+
+    const url = process.env.REACT_APP_BACKEND_URL;
+    const handleClick = async () => {
+        // try {
+        //     await axios.post(url + '/generatePdf', products);
+        // } catch (error) {
+            
+        // }
     }
 
   return (
@@ -36,6 +46,8 @@ const Home: React.FC = () => {
                 return <ProductDisplay product={product} />
             })
             }
+            { products.length !== 0 ?
+          <button className='bg-blue-700 text-white py-2 px-4 mt-4 rounded-md ml-12' onClick={handleClick}>Generate PDF</button> : ""}
         </div>
         
         <AddProduct addProduct={addProduct} />
