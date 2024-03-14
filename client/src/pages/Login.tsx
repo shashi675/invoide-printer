@@ -16,7 +16,10 @@ const Login: React.FC<any> = ({setUser}) => {
     password: '',
   });
 
+  const [error, setError] = useState("");
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setError("");
     const { name, value } = e.target;
     setFormData(prevState => ({
       ...prevState,
@@ -30,12 +33,14 @@ const Login: React.FC<any> = ({setUser}) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      setError("please wait");
       const user:userData = await axios.post(url + '/auth/login', formData);
+      setError('');
       const userData = user;
       setUser(userData.data.userData);
       navigate("/");
     } catch (error:any) {
-      console.log(error.response.data.error);
+      setError(error.response.data.error);
     }
   };
 
@@ -51,6 +56,7 @@ const Login: React.FC<any> = ({setUser}) => {
           <label>Password:</label>
           <input type="password" name="password" value={formData.password} onChange={handleInputChange} required className='border-2 border-black rounded ml-2 px-1'/>
         </div>
+        {error ? error : ""}
         <button type="submit" className='bg-blue-700 text-white py-2 px-4 mt-2 rounded-md text-center mx-auto'>Login</button>
       </form>
       <div className='mt-3'>
