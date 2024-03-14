@@ -1,4 +1,6 @@
+import axios from 'axios';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 interface RegisterForm {
@@ -14,6 +16,8 @@ const Register: React.FC = () => {
     password: '',
   });
 
+  const [error, setError] = useState("");
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
@@ -22,10 +26,19 @@ const Register: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const navigate = useNavigate();
+  const url = process.env.REACT_APP_BACKEND_URL;
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you can perform actions like sending data to backend, etc.
-    console.log('Form submitted:', formData);
+    try {
+      setError("please wait");
+      await axios.post(url + '/auth/register', formData);
+      setError('');
+      navigate("/login");
+    } catch (error:any) {
+      setError(error.response.data.error);
+    }
   };
 
   return (
@@ -44,6 +57,7 @@ const Register: React.FC = () => {
           <label>Password:</label>
           <input type="password" name="password" value={formData.password} onChange={handleInputChange} required className='border-2 border-black rounded ml-2 px-1'/>
         </div>
+        {error ? error : ""}
         <button type="submit" className='bg-blue-700 text-white py-2 px-4 mt-2 rounded-md text-center mx-auto'>Register</button>
       </form>
       <div className='mt-3'>
